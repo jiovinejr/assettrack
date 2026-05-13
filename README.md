@@ -28,12 +28,6 @@ Each asset gets a URL like `assets.domain.com/asset/AST-0001`. That URL gets enc
 
 The admin panel at `assets.domain.com` handles all the CRUD. Firestore makes this straightforward — the whole database interaction is about 20 lines of JavaScript.
 
-## Background
-
-I spent several years in the restaurant industry — bartending, cooking, managing. Three years ago I moved into tech and landed a role managing a produce wholesale warehouse. The job needed more technology injected into it so I started building internal tools to save time and reduce the kind of disorganization that costs money.
-
-This is one of those tools.
-
 ## Running It Yourself
 
 1. Create a Firebase project at [console.firebase.google.com](https://console.firebase.google.com)
