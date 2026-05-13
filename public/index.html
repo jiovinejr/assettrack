@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>AssetTrack — Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+<!-- ════════════════════ ADMIN LIST VIEW ════════════════════ -->
+<div id="view-admin" class="view active">
+  <div class="topbar">
+    <div class="home-logo-sm">ASSET<span>TRACK</span></div>
+    <div class="topbar-right">assets.iovine.com</div>
+  </div>
+  <div class="admin-toolbar">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="search-input" type="text" placeholder="Search name, ID, location..." oninput="filterAssets()">
+    </div>
+    <button class="btn-add-asset" onclick="showAddNew()">+ NEW</button>
+  </div>
+  <div class="admin-stats" id="admin-stats"></div>
+  <div class="scroll-area">
+    <div class="asset-list" id="asset-list"></div>
+  </div>
+</div>
+
+<!-- ════════════════════ EDIT / ADD VIEW ════════════════════ -->
+<div id="view-edit" class="view">
+  <div class="topbar">
+    <div class="btn-back" onclick="cancelEdit()">←</div>
+    <div class="topbar-title" id="edit-topbar-title">NEW ASSET</div>
+  </div>
+  <div class="scroll-area">
+    <div class="edit-content">
+
+      <div class="form-section-title">Identity</div>
+      <div class="form-block">
+        <div class="form-group">
+          <label class="form-label">Asset ID</label>
+          <input class="form-input" id="f-id" type="text" readonly placeholder="Auto-generated on save">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Asset Name *</label>
+          <input class="form-input" id="f-name" type="text" placeholder="e.g. Forklift Unit A3">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <input class="form-input" id="f-category" type="text" placeholder="e.g. Vehicle">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Status</label>
+            <select class="form-select" id="f-status">
+              <option>Active</option><option>Inactive</option>
+              <option>Under Repair</option><option>Retired</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section-title">Location & Condition</div>
+      <div class="form-block">
+        <div class="form-group">
+          <label class="form-label">Location</label>
+          <input class="form-input" id="f-location" type="text" placeholder="e.g. Warehouse B · Bay 3">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Condition</label>
+          <select class="form-select" id="f-condition">
+            <option>Excellent</option><option>Good</option><option>Fair</option><option>Poor</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-section-title">Service & Warranty</div>
+      <div class="form-block">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Last Serviced</label>
+            <input class="form-input" id="f-last-serviced" type="date">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Next Service Due</label>
+            <input class="form-input" id="f-next-service" type="date">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Warranty Expiry</label>
+          <input class="form-input" id="f-warranty" type="date">
+        </div>
+      </div>
+
+      <div class="form-section-title">Notes</div>
+      <div class="form-block">
+        <div class="form-group">
+          <textarea class="form-textarea" id="f-notes" placeholder="Serial numbers, purchase info, maintenance history..."></textarea>
+        </div>
+      </div>
+
+      <button class="btn-save" id="btn-save" onclick="saveAsset()">SAVE ASSET</button>
+      <button class="btn-delete" id="btn-delete" onclick="confirmDelete()" style="display:none;">🗑️ &nbsp;Delete This Asset</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════ LABEL VIEW ════════════════════ -->
+<div id="view-label" class="view">
+  <div class="topbar">
+    <div class="btn-back" onclick="showView('admin')">←</div>
+    <div class="topbar-title">QR LABEL</div>
+  </div>
+  <div class="scroll-area">
+    <div class="barcode-content">
+      <div id="print-target" class="barcode-label-card">
+        <div id="label-render-area"></div>
+        <div class="label-asset-id" id="label-id-text"></div>
+        <div class="label-asset-name" id="label-name-text"></div>
+        <div class="label-url" id="label-url-text"></div>
+      </div>
+      <button class="btn-print" onclick="window.print()">🖨 &nbsp;PRINT LABEL</button>
+      <div class="barcode-hint">
+        Scanning this QR code opens the asset page directly in any phone's camera app — no app needed.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════ SHARED ════════════════════ -->
+<div id="loader"><div class="loader-card"><div class="spinner"></div><div class="loader-msg" id="loader-msg">Loading...</div></div></div>
+<div id="toast"></div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<!-- Your config -->
+<script src="js/firebase-config.js"></script>
+
+<!-- Admin logic -->
+<script src="js/admin.js"></script>
+
+</body>
+</html>

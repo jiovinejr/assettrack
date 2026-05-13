@@ -1,0 +1,17 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCgZL1FTjik_wdJ21zdccjJ6R4Au8TDsxo",
+  authDomain: "assettrack-iovines.firebaseapp.com",
+  projectId: "assettrack-iovines",
+  storageBucket: "assettrack-iovines.firebasestorage.app",
+  messagingSenderId: "656526945129",
+  appId: "1:656526945129:web:b1f506d25e60699f2f6bf8"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);

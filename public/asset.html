@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>AssetTrack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+<div id="view-asset" class="view active">
+  <div class="topbar">
+    <a href="https://assets.iovine.com" class="btn-back">←</a>
+    <div class="home-logo-sm">ASSET<span>TRACK</span></div>
+  </div>
+  <div class="scroll-area">
+    <div class="asset-content" id="asset-content">
+      <!-- Filled by asset.js -->
+    </div>
+  </div>
+</div>
+
+<div id="loader"><div class="loader-card"><div class="spinner"></div><div class="loader-msg" id="loader-msg">Loading...</div></div></div>
+<div id="toast"></div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<script src="/js/firebase-config.js"></script>
+<script src="/js/asset.js"></script>
+
+</body>
+</html>
