@@ -1,0 +1,10 @@
+# Firebase
+.firebase/
+firebase-debug.log
+
+# Your secret keys
+public/js/firebase-config.js
+
+# OS junk
+.DS_Store
+Thumbs.db
