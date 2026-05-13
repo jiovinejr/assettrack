@@ -2,6 +2,14 @@
 
 A lightweight asset management web app I built for the produce warehouse I manage. The owner needed one place to track equipment — warranties, last service dates, condition, location — without digging through spreadsheets or trying to remember which forklift was last serviced and when.
 
+## Live Demo
+
+Scan this with your phone camera to see an asset page:
+
+![AST-0001](https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=4&format=png&data=https://assets.iovine.com/asset/AST-0001)
+
+Or open it directly: [assets.iovine.com/asset/AST-0001](https://assets.iovine.com/asset/AST-0001)
+
 ## The Problem
 
 We have a decent amount of equipment spread across a warehouse floor. No one knew when something was last serviced, whether it was still under warranty, or where a specific piece of equipment even lived. It was all in someone's head or buried in an email chain.
@@ -27,6 +35,12 @@ A web app that lives at a custom domain where you can:
 Each asset gets a URL like `assets.domain.com/asset/AST-0001`. That URL gets encoded into a QR code and printed as a label stuck to the physical asset. When someone scans it, their phone opens the asset page directly. No app install, no login, no scanning tech built into the web app itself — just a link.
 
 The admin panel at `assets.domain.com` handles all the CRUD. Firestore makes this straightforward — the whole database interaction is about 20 lines of JavaScript.
+
+## Background
+
+I spent several years in the restaurant industry — bartending, cooking, managing. Three years ago I moved into tech and landed a role managing a produce wholesale warehouse. The job needed more technology injected into it so I started building internal tools to save time and reduce the kind of disorganization that costs money.
+
+This is one of those tools.
 
 ## Running It Yourself
 
