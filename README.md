@@ -6,9 +6,9 @@ A lightweight asset management web app I built for the produce warehouse I manag
 
 Scan this with your phone camera to see an asset page:
 
-![AST-0001](https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=4&format=png&data=https://assets.iovine.com/asset/AST-0001)
+![AST-TEST](https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=4&format=png&data=https://assets.iovine.com/asset/AST-TEST)
 
-Or open it directly: [assets.iovine.com/asset/AST-0001](https://assets.iovine.com/asset/AST-0001)
+Or open it directly: [assets.iovine.com/asset/AST-TEST](https://assets.iovine.com/asset/AST-TEST)
 
 ## The Problem
 

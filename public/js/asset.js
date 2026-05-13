@@ -106,10 +106,15 @@ function renderAsset(a) {
       <div class="info-tile-value mono" style="margin-top:4px">${fmtDate(a.dateAdded) || '—'}</div>
     </div>
 
+    ${a.id !== 'AST-TEST' ? `
     <div class="admin-link-row">
-      <a href="https://assets.iovine.com" class="btn-admin-link">⚙️ &nbsp;Go to Admin Panel</a>
-    </div>
+      <a href="https://assets.iovine.com" class="btn-admin-link">← Back to Asset List</a>
+    </div>` : ''}
   `;
+
+  // Hide the topbar back button for demo asset
+  const backBtn = document.querySelector('.btn-back');
+  if (backBtn && a.id === 'AST-TEST') backBtn.style.display = 'none';
 }
 
 function renderNotFound(id) {
