@@ -109,7 +109,9 @@ function showAddNew() {
   isNewAsset = true; currentAsset = null;
   document.getElementById('edit-topbar-title').textContent = 'NEW ASSET';
   document.getElementById('btn-delete').style.display = 'none';
-  ['f-id','f-name','f-category','f-location','f-last-serviced','f-next-service','f-warranty','f-notes']
+  ['f-id','f-name','f-category','f-location','f-last-serviced','f-next-service',
+   'f-warranty','f-notes','f-serial','f-model','f-vendor','f-purchase-date',
+   'f-service-provider','f-service-phone','f-manual']
     .forEach(id => document.getElementById(id).value = '');
   document.getElementById('f-status').value    = 'Active';
   document.getElementById('f-condition').value = 'Good';
@@ -123,16 +125,23 @@ function editAsset(id) {
   isNewAsset = false;
   document.getElementById('edit-topbar-title').textContent = 'EDIT ASSET';
   document.getElementById('btn-delete').style.display = 'block';
-  document.getElementById('f-id').value             = a.id || '';
-  document.getElementById('f-name').value           = a.name || '';
-  document.getElementById('f-category').value       = a.category || '';
-  document.getElementById('f-status').value         = a.status || 'Active';
-  document.getElementById('f-location').value       = a.location || '';
-  document.getElementById('f-last-serviced').value  = a.lastServiced || '';
-  document.getElementById('f-next-service').value   = a.nextServiceDue || '';
-  document.getElementById('f-warranty').value       = a.warrantyExpiry || '';
-  document.getElementById('f-condition').value      = a.condition || 'Good';
-  document.getElementById('f-notes').value          = a.notes || '';
+  document.getElementById('f-id').value              = a.id || '';
+  document.getElementById('f-name').value            = a.name || '';
+  document.getElementById('f-category').value        = a.category || '';
+  document.getElementById('f-status').value          = a.status || 'Active';
+  document.getElementById('f-location').value        = a.location || '';
+  document.getElementById('f-last-serviced').value   = a.lastServiced || '';
+  document.getElementById('f-next-service').value    = a.nextServiceDue || '';
+  document.getElementById('f-warranty').value        = a.warrantyExpiry || '';
+  document.getElementById('f-condition').value       = a.condition || 'Good';
+  document.getElementById('f-notes').value           = a.notes || '';
+  document.getElementById('f-serial').value          = a.serialNumber || '';
+  document.getElementById('f-model').value           = a.modelNumber || '';
+  document.getElementById('f-vendor').value          = a.vendor || '';
+  document.getElementById('f-purchase-date').value   = a.purchaseDate || '';
+  document.getElementById('f-service-provider').value = a.serviceProvider || '';
+  document.getElementById('f-service-phone').value   = a.servicePhone || '';
+  document.getElementById('f-manual').value          = a.manualUrl || '';
   showView('edit');
 }
 
@@ -149,14 +158,21 @@ function saveAsset() {
 
   const data = {
     name,
-    category:       document.getElementById('f-category').value.trim(),
-    status:         document.getElementById('f-status').value,
-    location:       document.getElementById('f-location').value.trim(),
-    lastServiced:   document.getElementById('f-last-serviced').value,
-    nextServiceDue: document.getElementById('f-next-service').value,
-    warrantyExpiry: document.getElementById('f-warranty').value,
-    condition:      document.getElementById('f-condition').value,
-    notes:          document.getElementById('f-notes').value.trim(),
+    category:        document.getElementById('f-category').value.trim(),
+    status:          document.getElementById('f-status').value,
+    location:        document.getElementById('f-location').value.trim(),
+    lastServiced:    document.getElementById('f-last-serviced').value,
+    nextServiceDue:  document.getElementById('f-next-service').value,
+    warrantyExpiry:  document.getElementById('f-warranty').value,
+    condition:       document.getElementById('f-condition').value,
+    notes:           document.getElementById('f-notes').value.trim(),
+    serialNumber:    document.getElementById('f-serial').value.trim(),
+    modelNumber:     document.getElementById('f-model').value.trim(),
+    vendor:          document.getElementById('f-vendor').value.trim(),
+    purchaseDate:    document.getElementById('f-purchase-date').value,
+    serviceProvider: document.getElementById('f-service-provider').value.trim(),
+    servicePhone:    document.getElementById('f-service-phone').value.trim(),
+    manualUrl:       document.getElementById('f-manual').value.trim(),
   };
 
   const finish = (id) => {

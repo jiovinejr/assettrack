@@ -64,15 +64,35 @@ function renderAsset(a) {
       </div>
     </div>
 
-    <div class="section-label">Location & Category</div>
+    <div class="section-label">Identity</div>
     <div class="info-grid">
+      <div class="info-tile">
+        <div class="info-tile-label">Category</div>
+        <div class="info-tile-value">${esc(a.category || '—')}</div>
+      </div>
       <div class="info-tile">
         <div class="info-tile-label">Location</div>
         <div class="info-tile-value">${esc(a.location || '—')}</div>
       </div>
       <div class="info-tile">
-        <div class="info-tile-label">Category</div>
-        <div class="info-tile-value">${esc(a.category || '—')}</div>
+        <div class="info-tile-label">Serial Number</div>
+        <div class="info-tile-value mono">${esc(a.serialNumber || '—')}</div>
+      </div>
+      <div class="info-tile">
+        <div class="info-tile-label">Model Number</div>
+        <div class="info-tile-value mono">${esc(a.modelNumber || '—')}</div>
+      </div>
+    </div>
+
+    <div class="section-label">Purchase</div>
+    <div class="info-grid">
+      <div class="info-tile">
+        <div class="info-tile-label">Vendor</div>
+        <div class="info-tile-value">${esc(a.vendor || '—')}</div>
+      </div>
+      <div class="info-tile">
+        <div class="info-tile-label">Purchase Date</div>
+        <div class="info-tile-value">${fmtDate(a.purchaseDate) || '—'}</div>
       </div>
     </div>
 
@@ -88,11 +108,24 @@ function renderAsset(a) {
       </div>
     </div>
 
+    ${a.serviceProvider ? `
+    <div class="full-tile">
+      <div class="info-tile-label">Service Provider</div>
+      <div class="info-tile-value" style="margin-top:4px">${esc(a.serviceProvider)}</div>
+      ${a.servicePhone ? `<a href="tel:${esc(a.servicePhone)}" class="service-phone-link">📞 ${esc(a.servicePhone)}</a>` : ''}
+    </div>` : ''}
+
     <div class="section-label">Warranty</div>
     <div class="full-tile">
       <div class="info-tile-label">Expiry</div>
       <div class="info-tile-value ${wa.cls}" style="margin-top:4px">${wa.html}</div>
     </div>
+
+    ${a.manualUrl ? `
+    <div class="section-label">Documentation</div>
+    <div class="full-tile">
+      <a href="${esc(a.manualUrl)}" target="_blank" class="manual-link">📄 &nbsp;View Manual / Document</a>
+    </div>` : ''}
 
     ${a.notes ? `
     <div class="section-label">Notes</div>
